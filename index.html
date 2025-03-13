@@ -642,8 +642,30 @@
             const payment = document.querySelector('input[name="payment"]:checked').value;
             const voucherType = voucherTypeInput.value;
             
+            // Extract price from voucherType
+            let price = 0;
+            if (voucherType.includes("100.000")) {
+                price = 65000;
+            } else if (voucherType.includes("50.000")) {
+                price = 32500;
+            }
+            
+            // Calculate total payment
+            const totalPayment = price * parseInt(quantity);
+            const formattedTotal = new Intl.NumberFormat('id-ID').format(totalPayment);
+            
+            // Get clean voucher name
+            let cleanVoucherName = "";
+            if (voucherType.includes("100.000")) {
+                cleanVoucherName = "Voucher KFC Rp 100.000";
+            } else if (voucherType.includes("50.000")) {
+                cleanVoucherName = "Voucher KFC Rp 50.000";
+            } else {
+                cleanVoucherName = voucherType;
+            }
+            
             // Prepare message for WhatsApp
-            const message = `Halo, saya ingin memesan ${voucherType}%0A%0ANama: ${name}%0AJumlah: ${quantity} voucher%0AMetode Pembayaran: ${payment}`;
+            const message = `Halo, saya ingin memesan ${cleanVoucherName}%0A%0ANama: ${name}%0AJumlah: ${quantity} voucher%0AMetode Pembayaran: ${payment}%0A%0ATotal Pembayaran: Rp ${formattedTotal}`;
             
             // Redirect to WhatsApp
             window.open(`https://wa.me/6285752083533?text=${message}`, '_blank');
