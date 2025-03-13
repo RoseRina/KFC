@@ -355,6 +355,50 @@
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            max-width: 150px;
+            margin-top: 5px;
+        }
+        
+        .quantity-input input {
+            width: 60px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 8px 0;
+            -moz-appearance: textfield; /* Firefox */
+        }
+        
+        .quantity-input input::-webkit-outer-spin-button,
+        .quantity-input input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .quantity-btn {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .minus-btn {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .plus-btn {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -452,6 +496,15 @@
                 <div class="form-group">
                     <label for="name">Nama Lengkap</label>
                     <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Jumlah Voucher</label>
+                    <div class="quantity-input">
+                        <button type="button" class="quantity-btn minus-btn">-</button>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
+                        <button type="button" class="quantity-btn plus-btn">+</button>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -553,16 +606,44 @@
             paymentOptions.forEach(opt => opt.classList.remove('selected'));
         }
         
-        // Form submission
+        // Quantity buttons functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const quantityInput = document.getElementById('quantity');
+            const minusBtn = document.querySelector('.minus-btn');
+            const plusBtn = document.querySelector('.plus-btn');
+            
+            minusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            quantityInput.addEventListener('change', function() {
+                let value = parseInt(this.value);
+                if (value < 1) this.value = 1;
+                if (value > 10) this.value = 10;
+            });
+        });
+        
+        // Update form submission to include quantity
         orderForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
+            const quantity = document.getElementById('quantity').value;
             const payment = document.querySelector('input[name="payment"]:checked').value;
             const voucherType = voucherTypeInput.value;
             
             // Prepare message for WhatsApp
-            const message = `Halo, saya ingin memesan ${voucherType}%0A%0ANama: ${name}%0AMetode Pembayaran: ${payment}`;
+            const message = `Halo, saya ingin memesan ${voucherType}%0A%0ANama: ${name}%0AJumlah: ${quantity} voucher%0AMetode Pembayaran: ${payment}`;
             
             // Redirect to WhatsApp
             window.open(`https://wa.me/6285752083533?text=${message}`, '_blank');
