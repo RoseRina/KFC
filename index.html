@@ -175,12 +175,65 @@
         }
         
         .testimonials {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            margin-bottom: 30px;
+            position: relative;
+            padding: 40px 20px;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .testimonial-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            opacity: 0;
             text-align: center;
+            transition: opacity 0.5s ease;
+            transform: translateX(100%);
+        }
+        
+        .testimonial-item.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-item h4 {
+            color: #e4000f;
+            font-weight: bold;
+        }
+        
+        .testimonial-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: #e4000f;
         }
         
         .cta {
@@ -466,10 +519,38 @@
         <section class="testimonials">
             <h2>Kata Mereka Tentang Voucher KFC Kami</h2>
             <div class="testimonial-slider">
-                <div class="testimonial-item">
+                <div class="testimonial-item active">
                     <p>"Voucher KFC dari sini benar-benar membantu menghemat pengeluaran makan keluarga. Prosesnya juga sangat mudah!"</p>
                     <h4>- Budi Santoso</h4>
                 </div>
+                
+                <div class="testimonial-item">
+                    <p>"Saya sudah 3 kali beli voucher KFC di sini. Hemat banget, bisa diskon 35% dan voucher langsung dikirim ke WhatsApp. Rekomendasi!"</p>
+                    <h4>- Siti Nurhaliza</h4>
+                </div>
+                
+                <div class="testimonial-item">
+                    <p>"Awalnya ragu, tapi setelah coba ternyata voucher bisa dipakai di semua gerai KFC. Anak-anak jadi bisa makan KFC lebih sering dengan harga terjangkau."</p>
+                    <h4>- Ahmad Fauzi</h4>
+                </div>
+                
+                <div class="testimonial-item">
+                    <p>"Sering beli untuk hadiah ulang tahun teman kantor. Praktis dan semua pasti suka. Pengiriman voucher juga cepat, paling lama 30 menit sudah sampai!"</p>
+                    <h4>- Dewi Purnama</h4>
+                </div>
+                
+                <div class="testimonial-item">
+                    <p>"Metode pembayarannya lengkap dan proses pesanannya sangat mudah. Saya jadi pelanggan tetap karena bisa hemat banyak untuk makan di KFC."</p>
+                    <h4>- Reza Pratama</h4>
+                </div>
+            </div>
+            
+            <div class="testimonial-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
         </section>
         
@@ -680,6 +761,53 @@
                 closeModal();
             }
         }
+        
+        // Testimonial Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonialItems = document.querySelectorAll('.testimonial-item');
+            const dots = document.querySelectorAll('.dot');
+            let currentSlide = 0;
+            
+            // Function to show slide
+            function showSlide(index) {
+                // Hide all slides
+                testimonialItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show the current slide
+                testimonialItems[index].classList.add('active');
+                dots[index].classList.add('active');
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                currentSlide++;
+                if (currentSlide >= testimonialItems.length) {
+                    currentSlide = 0;
+                }
+                showSlide(currentSlide);
+            }
+            
+            // Set up click events for dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Auto-advance slides every 5 seconds
+            setInterval(nextSlide, 5000);
+            
+            // Show first slide initially
+            showSlide(0);
+        });
     </script>
 </body>
 </html>
