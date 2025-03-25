@@ -516,8 +516,8 @@
     
     <div class="container">
         <section class="hero">
-            <h1>DAPATKAN VOUCHER KFC DENGAN HARGA SPESIAL!</h1>
-            <p class="subtitle">Nikmati makanan favorit kamu dengan harga lebih hemat. Voucher digital, praktis dan cepat.</p>
+            <h1>DAPATKAN VOUCHER BELANJA DENGAN HARGA SPESIAL!</h1>
+            <p class="subtitle">Nikmati berbagai voucher KFC dan Alfamart dengan harga lebih hemat. Voucher digital, praktis dan cepat.</p>
             <a href="#vouchers" class="btn">Lihat Penawaran Voucher</a>
         </section>
         
@@ -577,12 +577,12 @@
         </section>
         
         <section class="benefits">
-            <h2>Mengapa Memilih Voucher KFC Kami?</h2>
+            <h2>Mengapa Memilih Voucher Kami?</h2>
             <div class="benefits-list">
                 <div class="benefit-item">
                     <div class="benefit-icon">💰</div>
                     <h3>Hemat Hingga 35%</h3>
-                    <p>Dapatkan diskon 35% dari nilai voucher KFC</p>
+                    <p>Dapatkan diskon hingga 35% dari nilai voucher</p>
                 </div>
                 
                 <div class="benefit-item">
@@ -606,20 +606,20 @@
         </section>
         
         <section class="testimonials">
-            <h2>Kata Mereka Tentang Voucher KFC Kami</h2>
+            <h2>Kata Mereka Tentang Voucher Kami</h2>
             <div class="testimonial-slider">
                 <div class="testimonial-item active">
-                    <p>"Voucher KFC dari sini benar-benar membantu menghemat pengeluaran makan keluarga. Prosesnya juga sangat mudah!"</p>
+                    <p>"Voucher dari sini benar-benar membantu menghemat pengeluaran belanja. Prosesnya juga sangat mudah!"</p>
                     <h4>- Budi Santoso</h4>
                 </div>
                 
                 <div class="testimonial-item">
-                    <p>"Saya sudah 3 kali beli voucher KFC di sini. Hemat banget, bisa diskon 35% dan voucher langsung dikirim ke WhatsApp. Rekomendasi!"</p>
+                    <p>"Saya sudah berkali-kali beli voucher di sini. Hemat banget, bisa dapat diskon dan voucher langsung dikirim ke WhatsApp. Rekomendasi!"</p>
                     <h4>- Siti Nurhaliza</h4>
                 </div>
                 
                 <div class="testimonial-item">
-                    <p>"Awalnya ragu, tapi setelah coba ternyata voucher bisa dipakai di semua gerai KFC. Anak-anak jadi bisa makan KFC lebih sering dengan harga terjangkau."</p>
+                    <p>"Awalnya ragu, tapi setelah coba ternyata voucher bisa dipakai dengan mudah. Jadi bisa lebih hemat untuk belanja kebutuhan keluarga."</p>
                     <h4>- Ahmad Fauzi</h4>
                 </div>
                 
@@ -629,7 +629,7 @@
                 </div>
                 
                 <div class="testimonial-item">
-                    <p>"Metode pembayarannya lengkap dan proses pesanannya sangat mudah. Saya jadi pelanggan tetap karena bisa hemat banyak untuk makan di KFC."</p>
+                    <p>"Metode pembayarannya lengkap dan proses pesanannya sangat mudah. Saya jadi pelanggan tetap karena bisa hemat banyak untuk belanja."</p>
                     <h4>- Reza Pratama</h4>
                 </div>
             </div>
@@ -645,7 +645,7 @@
         
         <section id="order" class="cta">
             <h2>PESAN VOUCHER SEKARANG JUGA!</h2>
-            <p>Jangan lewatkan kesempatan untuk menikmati KFC dengan harga lebih hemat 35%</p>
+            <p>Jangan lewatkan kesempatan untuk menikmati KFC dengan harga hemat 35% dan berbelanja di Alfamart dengan harga spesial!</p>
             <br>
             <a href="https://wa.me/6285752083533" class="btn">Pesan via WhatsApp</a>
         </section>
@@ -807,6 +807,44 @@
 
             // Update stock status
             updateStockStatus();
+
+            // Fungsi untuk slide testimoni
+            const testimonialItems = document.querySelectorAll('.testimonial-item');
+            const dots = document.querySelectorAll('.dot');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                testimonialItems.forEach(item => {
+                    item.classList.remove('active');
+                    item.style.transform = 'translateX(100%)';
+                });
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                testimonialItems[index].classList.add('active');
+                testimonialItems[index].style.transform = 'translateX(0)';
+                dots[index].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % testimonialItems.length;
+                showSlide(currentSlide);
+            }
+            
+            // Mulai slide otomatis
+            let slideInterval = setInterval(nextSlide, 5000); // Ganti slide setiap 5 detik
+            
+            // Tambahkan interaksi manual dengan dot
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(slideInterval); // Hentikan slide otomatis saat user klik
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                    slideInterval = setInterval(nextSlide, 5000); // Mulai lagi slide otomatis
+                });
+            });
+            
+            // Inisialisasi slide pertama
+            showSlide(currentSlide);
         });
 
         // Handle form submission
