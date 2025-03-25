@@ -886,9 +886,9 @@
                     <span class="new-price">Rp65.000</span>
                 </div>
                 <p>Hemat 35%! Voucher senilai Rp100.000 yang dapat digunakan untuk pembelian apapun di gerai KFC</p>
-                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
+                <div class="stock-info">Stok: 5 voucher</div>
                 <br>
-                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
+                <a href="#" class="btn buy-btn">Beli Sekarang</a>
             </div>
             
             <div class="voucher-card" data-provider="kfc">
@@ -899,7 +899,7 @@
                     <span class="new-price">Rp32.500</span>
                 </div>
                 <p>Hemat 35%! Voucher senilai Rp50.000 yang dapat digunakan untuk pembelian apapun di gerai KFC</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -912,7 +912,7 @@
                     <span class="new-price">Rp97.000</span>
                 </div>
                 <p>Hemat 3%! Voucher senilai<br>Rp100.000 yang dapat digunakan<br>untuk berbelanja di Alfamart</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -922,7 +922,7 @@
                 <div class="voucher-title">Voucher Alfamart Rp 50.000</div>
                 <div class="voucher-price"><span class="old-price">Rp50.000</span> <span class="new-price">Rp48.500</span></div>
                 <p>Hemat 3%! Voucher senilai Rp50.000 yang dapat digunakan untuk berbelanja di Alfamart</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -932,7 +932,7 @@
                 <div class="voucher-title">Voucher Alfamart Rp 25.000</div>
                 <div class="voucher-price"><span class="old-price">Rp25.000</span> <span class="new-price">Rp24.250</span></div>
                 <p>Hemat 3%! Voucher senilai Rp25.000 yang dapat digunakan untuk berbelanja di Alfamart</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -942,7 +942,7 @@
                 <div class="voucher-title">Voucher Indomaret Rp 25.000</div>
                 <div class="voucher-price"><span class="old-price">Rp25.000</span> <span class="new-price">Rp24.250</span></div>
                 <p>Hemat 3%! Voucher senilai Rp25.000 yang dapat digunakan untuk berbelanja di Indomaret</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -952,7 +952,7 @@
                 <div class="voucher-title">Voucher Indomaret Rp 50.000</div>
                 <div class="voucher-price"><span class="old-price">Rp50.000</span> <span class="new-price">Rp48.500</span></div>
                 <p>Hemat 3%! Voucher senilai Rp50.000 yang dapat digunakan untuk berbelanja di Indomaret</p>
-                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 5 voucher</div>
                 <br>
                 <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
@@ -1557,9 +1557,8 @@
             }, 2000);
         }
 
-        // Fungsi untuk membuka modal saat klik tombol "Beli Sekarang"
-        document.addEventListener('DOMContentLoaded', function() {
-            // Periksa semua voucher dan perbarui tampilan tombol
+        // Fungsi untuk memeriksa stok voucher dan memperbarui tampilan tombol
+        function updateStockDisplay() {
             const voucherCards = document.querySelectorAll('.voucher-card');
             voucherCards.forEach(card => {
                 const stockInfo = card.querySelector('.stock-info');
@@ -1573,8 +1572,20 @@
                     buyButton.textContent = 'Stok Habis';
                     // Tambahkan kelas 'out-of-stock' ke stockInfo
                     stockInfo.classList.add('out-of-stock');
+                } else {
+                    // Aktifkan tombol
+                    buyButton.classList.remove('disabled');
+                    buyButton.textContent = 'Beli Sekarang';
+                    // Hapus kelas 'out-of-stock' dari stockInfo
+                    stockInfo.classList.remove('out-of-stock');
                 }
             });
+        }
+
+        // Jalankan fungsi ketika dokumen dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Periksa semua voucher dan perbarui tampilan tombol
+            updateStockDisplay();
             
             // Tambahkan event listener untuk tombol "Beli Sekarang"
             const buyButtons = document.querySelectorAll('.buy-btn');
