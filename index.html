@@ -99,11 +99,18 @@
         }
         
         .voucher-img {
-            width: 100%;
-            max-width: 200px;
-            height: auto;
+            max-height: 120px;
             object-fit: contain;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .voucher-img:hover {
+            transform: scale(1.05);
         }
         
         .voucher-title {
@@ -287,10 +294,11 @@
         @media (max-width: 768px) {
             .voucher-container {
                 grid-template-columns: 1fr;
+                justify-items: center;
             }
             
             .voucher-card {
-                width: 90%;
+                width: 100%;
                 max-width: 350px;
             }
             
@@ -303,7 +311,101 @@
             }
             
             header h1 {
-                font-size: 32px;
+                font-size: 28px;
+                padding: 0 10px;
+            }
+
+            /* Perbaikan untuk mobile */
+            .container {
+                padding: 10px;
+            }
+
+            .hero {
+                padding: 20px 15px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 16px;
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            /* Modal untuk mobile */
+            .modal-content {
+                padding: 20px 15px;
+                width: 95%;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .form-buttons button {
+                margin-bottom: 10px;
+            }
+
+            .payment-option {
+                padding: 15px 10px;
+            }
+
+            /* Tab untuk mobile */
+            .tab-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            /* Tombol quantity untuk mobile */
+            .quantity-btn {
+                width: 45px;
+                height: 45px;
+            }
+
+            .quantity-input input {
+                height: 45px;
+            }
+        }
+        
+        /* Tambahkan untuk layar sangat kecil */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .hero h1 {
+                font-size: 22px;
+            }
+
+            .cta h2 {
+                font-size: 20px;
+            }
+            
+            .modal-content h3 {
+                font-size: 20px;
+            }
+            
+            .timer {
+                font-size: 18px;
             }
         }
         
@@ -334,6 +436,7 @@
             color: #e4000f;
             margin-bottom: 20px;
             text-align: center;
+            font-size: 24px;
         }
         
         .form-group {
@@ -343,70 +446,182 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
+            font-weight: 600;
+            color: #333;
         }
         
-        .form-group input[type="text"] {
+        .form-group input[type="text"],
+        .form-group input[type="tel"] {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input[type="text"]:focus,
+        .form-group input[type="tel"]:focus {
+            border-color: #0066b3;
+            box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.2);
+            outline: none;
+        }
+        
+        .payment-category {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #333;
             font-size: 16px;
         }
         
         .payment-options {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            margin-top: 10px;
+            margin-bottom: 15px;
         }
         
         .payment-option {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            text-align: center;
+            position: relative;
+            display: block;
             cursor: pointer;
-            transition: all 0.2s;
+            border: 1px solid #ddd;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
         }
         
         .payment-option:hover {
-            border-color: #e4000f;
+            border-color: #0066b3;
         }
         
-        .payment-option.selected {
-            background-color: #e4000f;
-            color: white;
-            border-color: #e4000f;
-        }
-        
-        .payment-option input {
-            display: none;
-        }
-        
-        .payment-category {
-            margin-top: 20px;
-            margin-bottom: 10px;
+        /* Style untuk opsi terpilih */
+        .payment-option input[type="radio"]:checked + span {
+            color: #0066b3;
             font-weight: bold;
+        }
+        
+        .payment-option input[type="radio"]:checked ~ .checkmark {
+            display: inline-block;
+        }
+        
+        .payment-option .checkmark {
+            display: none;
+            color: #0066b3;
+            margin-left: 5px;
+        }
+        
+        /* Style untuk opsi yang dipilih */
+        .payment-option.selected {
+            background-color: #ebf5ff;
+            border-color: #0066b3;
+            box-shadow: 0 0 5px rgba(0, 102, 179, 0.3);
+        }
+        
+        .payment-info {
+            background: #f8f8f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .payment-info h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .payment-info p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        #totalPayment {
+            color: #e4000f;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        #accountNumber {
+            font-family: monospace;
+            font-size: 18px;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            display: inline-block;
+            margin-top: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        /* Tambahkan style untuk nomor rekening yang bisa disalin */
+        .copy-text {
+            position: relative;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .copy-text .copy-icon {
+            margin-left: 8px;
+            color: #0066b3;
+            font-size: 18px;
+        }
+        
+        .copy-text .copied-message {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            display: none;
+            margin-bottom: 5px;
+        }
+        
+        .copy-text:active {
+            background-color: #f0f0f0;
         }
         
         .form-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            margin-top: 25px;
+            gap: 15px;
         }
         
         .form-buttons button {
-            padding: 12px 20px;
+            flex: 1;
+            padding: 14px 20px;
             border: none;
             border-radius: 5px;
             font-weight: bold;
+            font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         
         .cancel-btn {
             background-color: #f0f0f0;
             color: #333;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #e0e0e0;
         }
         
         .submit-btn {
@@ -415,56 +630,68 @@
         }
         
         .submit-btn:hover {
-            background-color: #b50000;
+            background-color: #c50000;
         }
         
-        @media (max-width: 768px) {
-            .payment-options {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
+        .timer {
+            text-align: center;
+            font-size: 20px;
+            color: #e4000f;
+            margin-bottom: 25px;
+            font-weight: bold;
+            padding: 10px;
+            background: #fff0f0;
+            border-radius: 5px;
         }
         
         .quantity-input {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 10px;
-        }
-        
-        .quantity-input input {
-            width: 60px;
-            text-align: center;
-            font-size: 16px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        /* Remove spinner arrows from number input */
-        .quantity-input input::-webkit-outer-spin-button,
-        .quantity-input input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        
-        .quantity-input input[type=number] {
-            -moz-appearance: textfield;
         }
         
         .quantity-btn {
+            width: 40px;
+            height: 40px;
             background: #f0f0f0;
             border: 1px solid #ddd;
-            padding: 8px 12px;
             font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: background-color 0.2s;
         }
         
-        .quantity-btn:disabled {
-            background-color: #e0e0e0;
-            cursor: not-allowed;
-            opacity: 0.5;
+        .quantity-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .quantity-btn.minus-btn {
+            border-radius: 6px 0 0 6px;
+        }
+        
+        .quantity-btn.plus-btn {
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .quantity-input input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+            font-size: 16px;
+        }
+        
+        input[type="file"] {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            width: 100%;
         }
         
         .fama-logo {
@@ -507,6 +734,135 @@
             color: #e4000f;
             font-weight: bold;
         }
+
+        /* Style untuk tab */
+        .tab-container {
+            width: 100%;
+        }
+
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #666;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: #e4000f;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e4000f;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Update existing styles */
+        .next-btn, .back-btn {
+            background-color: #0066b3;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .next-btn:hover, .back-btn:hover {
+            background-color: #004d8c;
+        }
+
+        /* Tambahkan style untuk pesan pengingat */
+        .form-text {
+            font-size: 13px;
+            color: #e4000f;
+            margin-top: 8px;
+            display: block;
+            font-style: italic;
+        }
+        
+        .form-text::before {
+            content: "* ";
+            font-weight: bold;
+        }
+
+        /* Styling untuk voucher retail (Indomaret & Alfamart) */
+        .voucher-card[data-provider="indomaret"] .voucher-img,
+        .voucher-card[data-provider="alfamart"] .voucher-img,
+        .voucher-card[data-provider="kfc"] .voucher-img {
+            max-height: 150px;
+            height: 150px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            padding: 5px;
+            background-color: white;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+        
+        /* Background gradien untuk kartu */
+        .voucher-card[data-provider="indomaret"],
+        .voucher-card[data-provider="alfamart"],
+        .voucher-card[data-provider="kfc"] {
+            border: 1px solid #e7e7e7;
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+        }
+        
+        /* Warna judul sesuai branding */
+        .voucher-card[data-provider="indomaret"] .voucher-title {
+            color: #0066b3;  /* Warna Indomaret */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .voucher-card[data-provider="alfamart"] .voucher-title {
+            color: #e4000f;  /* Warna Alfamart */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .voucher-card[data-provider="kfc"] .voucher-title {
+            color: #e4000f;  /* Warna KFC */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        /* Styling untuk tombol stok habis */
+        .btn.disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .stock-info.out-of-stock {
+            color: #e4000f;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -522,27 +878,33 @@
         </section>
         
         <section id="vouchers" class="voucher-container">
-            <div class="voucher-card">
+            <div class="voucher-card" data-provider="kfc">
                 <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/9/d9f24a0d-3765-4ae6-9353-9f1331898c8b.jpg" alt="Voucher KFC 100K" class="voucher-img">
                 <div class="voucher-title">Voucher KFC Rp 100.000</div>
-                <div class="voucher-price"><span class="old-price">Rp100.000</span> Rp65.000</div>
+                <div class="voucher-price">
+                    <span class="old-price">Rp100.000</span>
+                    <span class="new-price">Rp65.000</span>
+                </div>
                 <p>Hemat 35%! Voucher senilai Rp100.000 yang dapat digunakan untuk pembelian apapun di gerai KFC</p>
-                <div class="stock-info">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
                 <br>
-                <a href="#order" class="btn">Beli Sekarang</a>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
             
-            <div class="voucher-card">
+            <div class="voucher-card" data-provider="kfc">
                 <img src="https://images.tokopedia.net/img/cache/900/hDjmkQ/2024/11/13/6ce1c9b9-a4d7-434f-a420-21277c3c9ed4.jpg" alt="Voucher KFC 50K" class="voucher-img">
                 <div class="voucher-title">Voucher KFC Rp 50.000</div>
-                <div class="voucher-price"><span class="old-price">Rp50.000</span> Rp32.500</div>
+                <div class="voucher-price">
+                    <span class="old-price">Rp50.000</span>
+                    <span class="new-price">Rp32.500</span>
+                </div>
                 <p>Hemat 35%! Voucher senilai Rp50.000 yang dapat digunakan untuk pembelian apapun di gerai KFC</p>
-                <div class="stock-info">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
                 <br>
-                <a href="#order" class="btn">Beli Sekarang</a>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
 
-            <div class="voucher-card">
+            <div class="voucher-card" data-provider="alfamart">
                 <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasm-m5id17ixuztf8a@resize_w450_nl.webp" alt="Voucher Alfamart 100K" class="voucher-img">
                 <div class="voucher-title">Voucher Alfamart Rp 100.000</div>
                 <div class="voucher-price">
@@ -550,29 +912,59 @@
                     <span class="new-price">Rp97.000</span>
                 </div>
                 <p>Hemat 3%! Voucher senilai<br>Rp100.000 yang dapat digunakan<br>untuk berbelanja di Alfamart</p>
-                <div class="stock-info">Stok: 4 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
                 <br>
-                <a href="#order" class="btn">Beli Sekarang</a>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
 
-            <div class="voucher-card">
-                <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasm-m5id17ixuztf8a@resize_w450_nl.webp" alt="Voucher Alfamart 50K" class="voucher-img" style="max-height: 100px; object-fit: contain; margin-bottom: 20px;">
+            <div class="voucher-card" data-provider="alfamart">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasm-m5id17ixuztf8a@resize_w450_nl.webp" alt="Voucher Alfamart 50K" class="voucher-img">
                 <div class="voucher-title">Voucher Alfamart Rp 50.000</div>
-                <div class="voucher-price"><span class="old-price">Rp50.000</span> Rp48.500</div>
+                <div class="voucher-price"><span class="old-price">Rp50.000</span> <span class="new-price">Rp48.500</span></div>
                 <p>Hemat 3%! Voucher senilai Rp50.000 yang dapat digunakan untuk berbelanja di Alfamart</p>
-                <div class="stock-info">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
                 <br>
-                <a href="#order" class="btn">Beli Sekarang</a>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
 
-            <div class="voucher-card">
-                <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasm-m5id17ixuztf8a@resize_w450_nl.webp" alt="Voucher Alfamart 25K" class="voucher-img" style="max-height: 100px; object-fit: contain; margin-bottom: 20px;">
+            <div class="voucher-card" data-provider="alfamart">
+                <img src="https://down-id.img.susercontent.com/file/id-11134207-7rasm-m5id17ixuztf8a@resize_w450_nl.webp" alt="Voucher Alfamart 25K" class="voucher-img">
                 <div class="voucher-title">Voucher Alfamart Rp 25.000</div>
-                <div class="voucher-price"><span class="old-price">Rp25.000</span> Rp24.250</div>
+                <div class="voucher-price"><span class="old-price">Rp25.000</span> <span class="new-price">Rp24.250</span></div>
                 <p>Hemat 3%! Voucher senilai Rp25.000 yang dapat digunakan untuk berbelanja di Alfamart</p>
-                <div class="stock-info">Stok: 0 voucher</div>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
                 <br>
-                <a href="#order" class="btn">Beli Sekarang</a>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
+            </div>
+
+            <div class="voucher-card" data-provider="indomaret">
+                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//93/MTA-49133045/indomaret_voucher_indomaret__-voucher_digital_value_rp-_25-000_full01_eci5s6l2.jpg" alt="Voucher Indomaret 25K" class="voucher-img">
+                <div class="voucher-title">Voucher Indomaret Rp 25.000</div>
+                <div class="voucher-price"><span class="old-price">Rp25.000</span> <span class="new-price">Rp24.250</span></div>
+                <p>Hemat 3%! Voucher senilai Rp25.000 yang dapat digunakan untuk berbelanja di Indomaret</p>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <br>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
+            </div>
+
+            <div class="voucher-card" data-provider="indomaret">
+                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//99/MTA-49133178/indomaret_voucher_indomaret__-voucher_digital_value_rp-_50-000_full01_mgsrqsqj.jpg" alt="Voucher Indomaret 50K" class="voucher-img">
+                <div class="voucher-title">Voucher Indomaret Rp 50.000</div>
+                <div class="voucher-price"><span class="old-price">Rp50.000</span> <span class="new-price">Rp48.500</span></div>
+                <p>Hemat 3%! Voucher senilai Rp50.000 yang dapat digunakan untuk berbelanja di Indomaret</p>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <br>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
+            </div>
+
+            <div class="voucher-card" data-provider="indomaret">
+                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//95/MTA-2674903/voucher-center_voucher-center-indomaret-voucher-digital--rp-100-000-_full02.jpg" alt="Voucher Indomaret 100K" class="voucher-img">
+                <div class="voucher-title">Voucher Indomaret Rp 100.000</div>
+                <div class="voucher-price"><span class="old-price">Rp100.000</span> <span class="new-price">Rp97.000</span></div>
+                <p>Hemat 3%! Voucher senilai Rp100.000 yang dapat digunakan untuk berbelanja di Indomaret</p>
+                <div class="stock-info out-of-stock">Stok: 0 voucher</div>
+                <br>
+                <a href="#" class="btn buy-btn disabled">Stok Habis</a>
             </div>
         </section>
         
@@ -656,248 +1048,579 @@
         <p>Ini bukan situs resmi KFC. Voucher dijual oleh distributor resmi.</p>
     </footer>
     
-    <!-- Modal Order Form -->
+    <!-- Modal dengan struktur yang lebih sederhana -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
-            <h3>Form Pemesanan Voucher KFC</h3>
-            <form id="orderForm">
-                <input type="hidden" id="voucherType" name="voucherType" value="">
-                
-                <div class="form-group">
-                    <label for="name">Nama Lengkap</label>
-                    <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
+            <h3>Form Pemesanan Voucher</h3>
+            <div id="timer" class="timer">Waktu tersisa: 5:00</div>
+            
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="orderForm">Form Pemesanan</button>
+                    <button class="tab-btn" data-tab="paymentInfo">Informasi Pembayaran</button>
+                    <button class="tab-btn" data-tab="orderConfirmation" style="display: none;">Konfirmasi Pesanan</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="quantity">Jumlah Voucher</label>
-                    <div class="quantity-input">
-                        <button type="button" class="quantity-btn minus-btn">-</button>
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <button type="button" class="quantity-btn plus-btn">+</button>
+
+                <div class="tab-content">
+                    <!-- Tab Form Pemesanan -->
+                    <div id="orderFormTab" class="tab-pane active">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" required placeholder="Masukkan nama lengkap Anda">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="whatsapp">Nomor WhatsApp</label>
+                            <input type="tel" id="whatsapp" required placeholder="Contoh: 08123456789">
+                            <small class="form-text">Penting: Voucher akan dikirimkan ke nomor WhatsApp ini</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantity">Jumlah Voucher</label>
+                            <div class="quantity-input">
+                                <button type="button" class="quantity-btn minus-btn">-</button>
+                                <input type="number" id="quantity" value="1" min="1">
+                                <button type="button" class="quantity-btn plus-btn">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Metode Pembayaran</label>
+                            <div class="payment-category">BANK</div>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="BCA">
+                                    <span>BCA</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="BRI">
+                                    <span>BRI</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="SEABANK">
+                                    <span>SEABANK</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                            </div>
+                            
+                            <div class="payment-category">E-WALLET</div>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="DANA">
+                                    <span>DANA</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="OVO">
+                                    <span>OVO</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="GOPAY">
+                                    <span>GOPAY</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="LINKAJA">
+                                    <span>LINK AJA</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="SHOPEPAY">
+                                    <span>SHOPEPAY</span>
+                                    <i class="checkmark">✓</i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="cancel-btn" onclick="closeModal()">Batal</button>
+                            <button type="button" class="next-btn" onclick="nextStep()">Lanjut ke Pembayaran</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Informasi Pembayaran -->
+                    <div id="paymentInfoTab" class="tab-pane">
+                        <div class="payment-info">
+                            <h4>Informasi Pembayaran</h4>
+                            <p>Total Pembayaran: <span id="totalPayment">Rp 0</span></p>
+                            <p>Metode Pembayaran: <span id="selectedPayment"></span></p>
+                            <p>Nomor Rekening/Nomor HP: 
+                                <span id="accountNumberContainer" class="copy-text" onclick="copyToClipboard('accountNumber')">
+                                    <span id="accountNumber"></span>
+                                    <span class="copy-icon">📋</span>
+                                    <span class="copied-message">Tersalin!</span>
+                                </span>
+                            </p>
+                            <p>Atas Nama: <span id="accountName"></span></p>
+                            <p style="font-style: italic; color: #666; margin-top: 10px; font-size: 14px;">
+                                * Tekan nomor rekening/nomor HP untuk menyalinnya
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paymentProof">Upload Bukti Pembayaran</label>
+                            <input type="file" id="paymentProof" accept="image/*" required>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="button" class="back-btn" onclick="prevStep()">Kembali</button>
+                            <button type="button" class="submit-btn" onclick="submitOrder()">Konfirmasi Pembayaran</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Konfirmasi Pesanan -->
+                    <div id="orderConfirmationTab" class="tab-pane">
+                        <div class="order-success">
+                            <div style="text-align: center; margin-bottom: 30px;">
+                                <div style="font-size: 60px; color: #28a745; margin-bottom: 20px;">✓</div>
+                                <h3 style="color: #28a745; margin-bottom: 15px;">Pesanan Berhasil!</h3>
+                                <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                                    Pesanan Anda sedang diproses. Kami akan segera mengirimkan voucher melalui WhatsApp.
+                                </p>
+                                <div class="divider" style="height: 1px; background-color: #eee; margin: 20px 0;"></div>
+                                <p style="font-size: 14px; color: #e4000f; margin-top: 20px;">
+                                    Jika dalam waktu 1 Jam belum ada pengiriman voucher, hubungi kami melalui:
+                                </p>
+                                <a href="https://wa.me/6285752083533" target="_blank" class="btn" style="margin-top: 15px; background-color: #25D366; display: inline-flex; align-items: center; gap: 8px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                                    </svg>
+                                    WhatsApp Admin
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label>Metode Pembayaran</label>
-                    
-                    <div class="payment-category">BANK</div>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="BCA" required>
-                            BCA
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="BRI">
-                            BRI
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="SEABANK">
-                            SEABANK
-                        </label>
-                    </div>
-                    
-                    <div class="payment-category">E-WALLET</div>
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="OVO">
-                            OVO
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="DANA">
-                            DANA
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" name="payment" value="GOPAY">
-                            GOPAY
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="button" class="cancel-btn" onclick="closeModal()">Batal</button>
-                    <button type="submit" class="submit-btn">Lanjutkan ke WhatsApp</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     
     <script>
-        // Definisikan variabel di awal
-        const modal = document.getElementById("orderModal");
-        const orderForm = document.getElementById("orderForm");
-        const voucherTypeInput = document.getElementById("voucherType");
-        const quantityInput = document.getElementById("quantity");
-        const minusBtn = document.querySelector('.minus-btn');
-        const plusBtn = document.querySelector('.plus-btn');
+        // Simpan variabel global yang dibutuhkan
         let currentVoucherStock = 0;
+        let originalStock = 0;
+        let currentOrderId = null;
+        let orderTimer = null;
+        let selectedVoucherPrice = 0;
+        let selectedVoucherTitle = "";
+
+        // Tambahkan variabel untuk Telegram
+        const TELEGRAM_BOT_TOKEN = '7892360127:AAFrvXO4PxaPDQx4JE2RTCW5FJaeHOOUJ6c';
+        const TELEGRAM_CHAT_ID = '156619417';
+
+        // Tambahkan variabel dan fungsi baru
+        const bankAccounts = {
+            'BCA': '8171066191',
+            'BRI': '369901056218536',
+            'SEABANK': '901868798115',
+            'DANA': '085281629923',
+            'OVO': '085752083533',
+            'GOPAY': '085752083533',
+            'LINKAJA': '085752083533',
+            'SHOPEPAY': '085752083533'
+        };
+
+        // Tambahkan informasi nama pemilik akun
+        const accountNames = {
+            'BCA': 'Ferdi',
+            'BRI': 'Ferdi',
+            'SEABANK': 'Ferdi',
+            'DANA': 'Novia Anggini',
+            'OVO': 'Ferdi',
+            'GOPAY': 'Ferdi',
+            'LINKAJA': 'Ferdi',
+            'SHOPEPAY': 'Ferdi'
+        };
 
         // Fungsi untuk membuka modal
         function openModal(card) {
+            const stockInfo = card.querySelector('.stock-info');
+            currentVoucherStock = parseInt(stockInfo.textContent.match(/\d+/)[0]) || 0;
+            
+            // Cek stok terlebih dahulu
+            if (currentVoucherStock <= 0) {
+                alert('Maaf, stok voucher ini sudah habis.');
+                return; // Hentikan eksekusi fungsi
+            }
+            
+            const modal = document.getElementById('orderModal');
             const title = card.querySelector('.voucher-title').textContent;
-            const price = card.querySelector('.voucher-price').textContent;
-            const stockText = card.querySelector('.stock-info').textContent;
-            currentVoucherStock = parseInt(stockText.match(/\d+/)[0]);
             
-            // Reset dan set nilai form
-            quantityInput.value = 1;
-            quantityInput.max = currentVoucherStock;
-            voucherTypeInput.value = `${title} - ${price}`;
+            // PERBAIKAN: Ekstraksi harga dengan pendekatan yang lebih sederhana
+            let priceText = "";
+            const voucherPrice = card.querySelector('.voucher-price');
             
-            // Update tombol quantity
-            updateButtons();
+            // Coba ekstrak harga diskon dari text content
+            if (voucherPrice) {
+                const textContent = voucherPrice.textContent.trim();
+                // Ambil semua angka dalam teks
+                const matches = textContent.match(/Rp\s?(\d+[\d.,]*)/g);
+                
+                if (matches && matches.length > 0) {
+                    // Ambil harga terakhir yang merupakan harga diskon
+                    priceText = matches[matches.length - 1];
+                    // Bersihkan format dan ekstrak angka saja
+                    selectedVoucherPrice = parseInt(priceText.replace(/[^\d]/g, ''));
+                }
+            }
+            
+            console.log("Judul voucher:", title);
+            console.log("Teks harga yang ditemukan:", priceText);
+            console.log("Harga yang digunakan:", selectedVoucherPrice);
+            
+            selectedVoucherTitle = title;
+            originalStock = currentVoucherStock;
+            
+            // Reset form
+            document.getElementById('name').value = '';
+            document.getElementById('whatsapp').value = '';
+            document.getElementById('quantity').value = '1';
+            document.querySelectorAll('input[name="payment"]').forEach(radio => radio.checked = false);
+            
+            // Reset ke tab pertama
+            document.querySelector('.tab-btn[data-tab="orderForm"]').classList.add('active');
+            document.querySelector('.tab-btn[data-tab="paymentInfo"]').classList.remove('active');
+            document.getElementById('orderFormTab').classList.add('active');
+            document.getElementById('paymentInfoTab').classList.remove('active');
             
             // Tampilkan modal
-            modal.style.display = "flex";
+            modal.style.display = 'flex';
+            
+            // Mulai timer
+            startTimer(300);
         }
 
         // Fungsi untuk menutup modal
         function closeModal() {
-            modal.style.display = "none";
-            orderForm.reset();
+            const modal = document.getElementById('orderModal');
+            modal.style.display = 'none';
+            clearInterval(orderTimer);
         }
 
-        // Fungsi update tombol quantity
-        function updateButtons() {
-            const value = parseInt(quantityInput.value);
-            minusBtn.disabled = value <= 1;
-            plusBtn.disabled = value >= currentVoucherStock;
-        }
-
-        // Event listener saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', function() {
-            // Event listener untuk tombol Beli Sekarang
-            document.querySelectorAll('.btn').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') === '#order') {
-                        e.preventDefault();
-                        const card = this.closest('.voucher-card');
-                        openModal(card);
-                    }
-                });
-            });
-
-            // Event listener untuk tombol quantity
-            minusBtn.addEventListener('click', () => {
-                const value = parseInt(quantityInput.value);
-                if (value > 1) {
-                    quantityInput.value = value - 1;
-                    updateButtons();
-                }
-            });
-
-            plusBtn.addEventListener('click', () => {
-                const value = parseInt(quantityInput.value);
-                if (value < currentVoucherStock) {
-                    quantityInput.value = value + 1;
-                    updateButtons();
-                }
-            });
-
-            // Validasi input quantity
-            quantityInput.addEventListener('change', () => {
-                let value = parseInt(quantityInput.value);
-                if (isNaN(value) || value < 1) {
-                    value = 1;
-                } else if (value > currentVoucherStock) {
-                    value = currentVoucherStock;
-                }
-                quantityInput.value = value;
-                updateButtons();
-            });
-
-            // Update stock status
-            updateStockStatus();
-
-            // Fungsi untuk slide testimoni
-            const testimonialItems = document.querySelectorAll('.testimonial-item');
-            const dots = document.querySelectorAll('.dot');
-            let currentSlide = 0;
+        // Fungsi untuk timer
+        function startTimer(duration) {
+            let timer = duration;
+            const timerDisplay = document.getElementById('timer');
             
-            function showSlide(index) {
-                testimonialItems.forEach(item => {
-                    item.classList.remove('active');
-                    item.style.transform = 'translateX(100%)';
-                });
-                dots.forEach(dot => dot.classList.remove('active'));
+            clearInterval(orderTimer);
+            orderTimer = setInterval(function() {
+                const minutes = Math.floor(timer / 60);
+                const seconds = timer % 60;
                 
-                testimonialItems[index].classList.add('active');
-                testimonialItems[index].style.transform = 'translateX(0)';
-                dots[index].classList.add('active');
-            }
-            
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % testimonialItems.length;
-                showSlide(currentSlide);
-            }
-            
-            // Mulai slide otomatis
-            let slideInterval = setInterval(nextSlide, 5000); // Ganti slide setiap 5 detik
-            
-            // Tambahkan interaksi manual dengan dot
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    clearInterval(slideInterval); // Hentikan slide otomatis saat user klik
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                    slideInterval = setInterval(nextSlide, 5000); // Mulai lagi slide otomatis
-                });
-            });
-            
-            // Inisialisasi slide pertama
-            showSlide(currentSlide);
-        });
+                timerDisplay.textContent = `Waktu tersisa: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                
+                if (--timer < 0) {
+                    clearInterval(orderTimer);
+                    closeModal();
+                }
+            }, 1000);
+        }
 
-        // Handle form submission
-        orderForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Fungsi untuk mengatur tombol quantity
+        function updateQuantity(action) {
+            const quantityInput = document.getElementById('quantity');
+            let currentValue = parseInt(quantityInput.value);
+            
+            if (action === 'minus' && currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            } else if (action === 'plus' && currentValue < currentVoucherStock) {
+                quantityInput.value = currentValue + 1;
+            }
+        }
+
+        // Fungsi untuk pindah ke tab pembayaran
+        function nextStep() {
+            const name = document.getElementById('name').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const payment = document.querySelector('input[name="payment"]:checked');
+            
+            if (!name) {
+                alert('Mohon isi nama lengkap Anda');
+                return;
+            }
+            if (!whatsapp) {
+                alert('Mohon isi nomor WhatsApp Anda');
+                return;
+            }
+            if (!payment) {
+                alert('Mohon pilih metode pembayaran');
+                return;
+            }
+            
+            // Update informasi pembayaran
+            const paymentMethod = payment.value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            // Fallback jika harga tidak valid
+            if (!selectedVoucherPrice || selectedVoucherPrice <= 0) {
+                console.error("Harga tidak valid:", selectedVoucherPrice);
+                alert("Terjadi kesalahan dalam menghitung harga. Silakan coba lagi.");
+                return;
+            }
+            
+            // Hitung total dan format dengan benar
+            const total = selectedVoucherPrice * quantity;
+            console.log("Harga satuan:", selectedVoucherPrice);
+            console.log("Jumlah:", quantity);
+            console.log("Total pembayaran:", total);
+            
+            document.getElementById('totalPayment').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            document.getElementById('selectedPayment').textContent = paymentMethod;
+            document.getElementById('accountNumber').textContent = bankAccounts[paymentMethod];
+            document.getElementById('accountName').textContent = accountNames[paymentMethod];
+            
+            // Pindah ke tab pembayaran
+            document.querySelector('.tab-btn[data-tab="orderForm"]').classList.remove('active');
+            document.querySelector('.tab-btn[data-tab="paymentInfo"]').classList.add('active');
+            document.getElementById('orderFormTab').classList.remove('active');
+            document.getElementById('paymentInfoTab').classList.add('active');
+        }
+
+        // Fungsi untuk kembali ke tab form
+        function prevStep() {
+            document.querySelector('.tab-btn[data-tab="paymentInfo"]').classList.remove('active');
+            document.querySelector('.tab-btn[data-tab="orderForm"]').classList.add('active');
+            document.getElementById('paymentInfoTab').classList.remove('active');
+            document.getElementById('orderFormTab').classList.add('active');
+        }
+
+        // Fungsi untuk submit order
+        function submitOrder() {
+            const paymentProof = document.getElementById('paymentProof').files[0];
+            if (!paymentProof) {
+                alert('Mohon upload bukti pembayaran');
+                return;
+            }
             
             const name = document.getElementById('name').value;
-            const quantity = quantityInput.value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const quantity = document.getElementById('quantity').value;
             const payment = document.querySelector('input[name="payment"]:checked').value;
-            const voucherType = voucherTypeInput.value;
+            const total = selectedVoucherPrice * parseInt(quantity);
             
-            // Prepare WhatsApp message
-            const message = `Halo, saya ingin memesan:
-${voucherType}
-Jumlah: ${quantity}
-Pembayaran via: ${payment}
-Nama: ${name}`;
-            
-            // Encode message for WhatsApp URL
-            const encodedMessage = encodeURIComponent(message);
-            const waURL = `https://wa.me/6285752083533?text=${encodedMessage}`;
-            
-            // Open WhatsApp
-            window.open(waURL, '_blank');
-            
-            // Close modal
-            closeModal();
-        });
-
-        // Update stock status
-        function updateStockStatus() {
-            const vouchers = document.querySelectorAll('.voucher-card');
-            
-            vouchers.forEach(card => {
-                const stockInfo = card.querySelector('.stock-info');
-                const buyButton = card.querySelector('.btn');
-                
-                const stockText = stockInfo.textContent;
-                const stockNumber = parseInt(stockText.match(/\d+/)[0]);
-                
-                if (stockNumber <= 0) {
-                    stockInfo.textContent = "Stok: Habis";
-                    stockInfo.classList.add('out-of-stock');
-                    buyButton.classList.add('disabled');
-                    buyButton.textContent = "Stok Habis";
-                    
-                    buyButton.onclick = (e) => {
-                        e.preventDefault();
-                        return false;
-                    };
+            // Kurangi stok
+            const voucherTitle = selectedVoucherTitle;
+            const cards = document.querySelectorAll('.voucher-card');
+            for (let card of cards) {
+                const cardTitle = card.querySelector('.voucher-title').textContent;
+                if (cardTitle === voucherTitle) {
+                    const stockInfo = card.querySelector('.stock-info');
+                    const newStock = originalStock - parseInt(quantity);
+                    stockInfo.textContent = `Stok: ${newStock} voucher`;
                 }
+            }
+            
+            // Konversi bukti pembayaran ke base64
+            const reader = new FileReader();
+            reader.readAsDataURL(paymentProof);
+            reader.onload = function() {
+                // Kirim informasi pesanan ke Telegram
+                sendOrderToTelegram(name, whatsapp, voucherTitle, quantity, payment, total, reader.result);
+                
+                // Tampilkan tab konfirmasi pesanan
+                showOrderConfirmation();
+            };
+        }
+        
+        // Fungsi untuk menampilkan konfirmasi pesanan
+        function showOrderConfirmation() {
+            // Sembunyikan tab sebelumnya dan tampilkan tab konfirmasi
+            document.querySelector('.tab-btn[data-tab="paymentInfo"]').classList.remove('active');
+            document.querySelector('.tab-btn[data-tab="orderConfirmation"]').style.display = 'block';
+            document.querySelector('.tab-btn[data-tab="orderConfirmation"]').classList.add('active');
+            
+            document.getElementById('paymentInfoTab').classList.remove('active');
+            document.getElementById('orderConfirmationTab').classList.add('active');
+            
+            // Reset timer dan beri waktu tambahan untuk melihat konfirmasi
+            clearInterval(orderTimer);
+            startTimer(300); // 5 menit untuk melihat konfirmasi
+        }
+        
+        // Fungsi untuk mengirim pesanan ke Telegram
+        function sendOrderToTelegram(name, whatsapp, voucherTitle, quantity, payment, total, imageBase64) {
+            // Persiapkan pesan yang akan dikirim
+            const message = `
+🛒 *PESANAN BARU*
+------------------
+📦 Produk: ${voucherTitle}
+👤 Nama: ${name}
+📱 WhatsApp: ${whatsapp}
+🔢 Jumlah: ${quantity}
+💰 Total: Rp ${total.toLocaleString('id-ID')}
+💳 Metode Pembayaran: ${payment}
+⏰ Waktu: ${new Date().toLocaleString('id-ID')}
+`;
+            
+            // Kirim pesan ke Telegram
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Pesan terkirim ke Telegram:', data);
+                // Setelah pesan terkirim, kirim bukti pembayaran
+                sendPaymentProofToTelegram(imageBase64);
+            })
+            .catch(error => {
+                console.error('Error mengirim pesan ke Telegram:', error);
             });
         }
+        
+        // Fungsi untuk mengirim bukti pembayaran ke Telegram
+        function sendPaymentProofToTelegram(imageBase64) {
+            // Coba kirim dengan formData (metode yang lebih stabil)
+            const formData = new FormData();
+            
+            // Konversi base64 menjadi blob
+            const byteString = atob(imageBase64.split(',')[1]);
+            const mimeString = imageBase64.split(',')[0].split(':')[1].split(';')[0];
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            
+            for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            
+            const blob = new Blob([ab], {type: mimeString});
+            
+            // Tambahkan ke formData
+            formData.append('chat_id', TELEGRAM_CHAT_ID);
+            formData.append('photo', blob, 'payment_proof.jpg');
+            formData.append('caption', '📎 Bukti Pembayaran');
+            
+            // Kirim ke Telegram dengan formData
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Bukti pembayaran terkirim ke Telegram:', data);
+                if (!data.ok) {
+                    // Jika gagal, coba metode alternatif
+                    sendPhotoAlternative();
+                }
+            })
+            .catch(error => {
+                console.error('Error mengirim bukti pembayaran ke Telegram:', error);
+                sendPhotoAlternative();
+            });
+        }
+        
+        // Metode alternatif untuk mengirim foto ke Telegram
+        function sendPhotoAlternative() {
+            // Metode alternatif: kirim link untuk upload manual
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: '⚠️ Bukti pembayaran gagal dikirim secara otomatis. Mohon minta pembeli mengirimkan bukti pembayaran melalui WhatsApp.'
+                })
+            });
+        }
+
+        // Fungsi untuk menyalin nomor rekening/HP ke clipboard
+        function copyToClipboard(elementId) {
+            const copyText = document.getElementById(elementId).textContent;
+            const container = document.getElementById(elementId + 'Container');
+            const copiedMessage = container.querySelector('.copied-message');
+            
+            // Buat temporary textarea untuk menyalin teks
+            const textarea = document.createElement('textarea');
+            textarea.value = copyText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+            // Tampilkan pesan "Tersalin!"
+            copiedMessage.style.display = 'block';
+            
+            // Sembunyikan pesan setelah 2 detik
+            setTimeout(function() {
+                copiedMessage.style.display = 'none';
+            }, 2000);
+        }
+
+        // Fungsi untuk membuka modal saat klik tombol "Beli Sekarang"
+        document.addEventListener('DOMContentLoaded', function() {
+            // Periksa semua voucher dan perbarui tampilan tombol
+            const voucherCards = document.querySelectorAll('.voucher-card');
+            voucherCards.forEach(card => {
+                const stockInfo = card.querySelector('.stock-info');
+                const stockText = stockInfo.textContent;
+                const stockCount = parseInt(stockText.match(/\d+/)[0]) || 0;
+                const buyButton = card.querySelector('.buy-btn');
+                
+                if (stockCount <= 0) {
+                    // Nonaktifkan tombol dan ubah tampilannya
+                    buyButton.classList.add('disabled');
+                    buyButton.textContent = 'Stok Habis';
+                    // Tambahkan kelas 'out-of-stock' ke stockInfo
+                    stockInfo.classList.add('out-of-stock');
+                }
+            });
+            
+            // Tambahkan event listener untuk tombol "Beli Sekarang"
+            const buyButtons = document.querySelectorAll('.buy-btn');
+            for (let i = 0; i < buyButtons.length; i++) {
+                buyButtons[i].addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Periksa apakah tombol dinonaktifkan
+                    if (this.classList.contains('disabled')) {
+                        alert('Maaf, stok voucher ini sudah habis.');
+                        return;
+                    }
+                    
+                    const card = this.closest('.voucher-card');
+                    openModal(card);
+                });
+            }
+            
+            // Tambahkan event listener untuk tombol quantity
+            const minusBtn = document.querySelector('.minus-btn');
+            if (minusBtn) {
+                minusBtn.addEventListener('click', function() {
+                    updateQuantity('minus');
+                });
+            }
+            
+            const plusBtn = document.querySelector('.plus-btn');
+            if (plusBtn) {
+                plusBtn.addEventListener('click', function() {
+                    updateQuantity('plus');
+                });
+            }
+            
+            // Tambahkan event listener untuk opsi pembayaran
+            document.querySelectorAll('.payment-option input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Hapus class selected dari semua opsi
+                    document.querySelectorAll('.payment-option').forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    
+                    // Tambahkan class selected ke opsi yang dipilih
+                    this.closest('.payment-option').classList.add('selected');
+                });
+            });
+        });
     </script>
 </body>
 </html>
